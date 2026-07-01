@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="E-Libra — Your digital library portal. Read, discover, and manage books online. Login to access thousands of books."
+    />
+    <meta name="theme-color" content="#6C63FF" />
+    <title>E-Libra · Digital Library</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>"
+    />
+  </head>
+  <body>
+    <!-- ═══════════════════════════ AUTH SCREEN ══════════════════════════════ -->
+    <section id="auth-screen" aria-label="Authentication">
+      <div class="auth-bg">
+        <div class="auth-orb"></div>
+        <div class="auth-orb"></div>
+        <div class="auth-orb"></div>
+      </div>
+
+      <div class="auth-container">
+        <div class="auth-logo">
+          <span class="logo-icon">📚</span>
+          <h1>E-Libra</h1>
+          <p>Your digital reading universe</p>
+        </div>
+
+        <div class="auth-card">
+          <!-- Tab Switcher -->
+          <div class="auth-tabs" role="tablist">
+            <button
+              id="login-tab"
+              class="auth-tab active"
+              role="tab"
+              aria-selected="true"
+              aria-controls="login-form"
+            >
+              Sign In
+            </button>
+            <button
+              id="register-tab"
+              class="auth-tab"
+              role="tab"
+              aria-selected="false"
+              aria-controls="register-form"
+            >
+              Register
+            </button>
+          </div>
+
+          <!-- Login Form -->
+          <form
+            id="login-form"
+            role="tabpanel"
+            aria-labelledby="login-tab"
+            novalidate
+          >
+            <div id="login-error" class="auth-error hidden" role="alert">
+              <span>⚠️</span>
+              <span id="login-error-msg"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="login-username">Username</label>
+              <div class="input-wrapper">
+                <span class="input-icon">👤</span>
+                <input
+                  type="text"
+                  id="login-username"
+                  placeholder="Enter your username"
+                  autocomplete="username"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <div class="input-wrapper">
+                <span class="input-icon">🔒</span>
+                <input
+                  type="password"
+                  id="login-password"
+                  placeholder="Enter your password"
+                  autocomplete="current-password"
+                  required
+                />
+                <button
+                  type="button"
+                  class="toggle-password"
+                  aria-label="Toggle password visibility"
+                >
+                  👁️
+                </button>
+              </div>
+            </div>
+
+            <button type="submit" class="form-submit">
+              Sign In to E-Libra
+            </button>
+
+
+          </form>
+
+          <!-- Register Form -->
+          <form
+            id="register-form"
+            class="hidden"
+            role="tabpanel"
+            aria-labelledby="register-tab"
+            novalidate
+          >
+            <div id="register-error" class="auth-error hidden" role="alert">
+              <span>⚠️</span>
+              <span id="register-error-msg"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-name">Full Name</label>
+              <div class="input-wrapper">
+                <span class="input-icon">🪪</span>
+                <input
+                  type="text"
+                  id="reg-name"
+                  placeholder="Your full name"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-username">Username</label>
+              <div class="input-wrapper">
+                <span class="input-icon">👤</span>
+                <input
+                  type="text"
+                  id="reg-username"
+                  placeholder="Choose a username"
+                  autocomplete="username"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-password">Password</label>
+              <div class="input-wrapper">
+                <span class="input-icon">🔒</span>
+                <input
+                  type="password"
+                  id="reg-password"
+                  placeholder="Create a password"
+                  autocomplete="new-password"
+                  required
+                />
+                <button
+                  type="button"
+                  class="toggle-password"
+                  aria-label="Toggle password visibility"
+                >
+                  👁️
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-confirm">Confirm Password</label>
+              <div class="input-wrapper">
+                <span class="input-icon">🔐</span>
+                <input
+                  type="password"
+                  id="reg-confirm"
+                  placeholder="Repeat your password"
+                  autocomplete="new-password"
+                  required
+                />
+                <button
+                  type="button"
+                  class="toggle-password"
+                  aria-label="Toggle password visibility"
+                >
+                  👁️
+                </button>
+              </div>
+            </div>
+
+            <button type="submit" class="form-submit">Create Account</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════ MAIN APP ════════════════════════════════ -->
+    <div id="app">
+      <!-- ── Navbar ──────────────────────────────────────────────────────── -->
+      <nav id="navbar" aria-label="Main navigation">
+        <a href="#" class="nav-brand" aria-label="E-Libra Home">
+          <span class="brand-icon">📚</span>
+          <span class="brand-name">E-Libra</span>
+        </a>
+
+        <div class="nav-search">
+          <span class="search-icon" aria-hidden="true">🔍</span>
+          <input
+            type="search"
+            id="search-input"
+            placeholder="Search books, authors, genres…"
+            aria-label="Search books"
+          />
+        </div>
+
+        <div class="nav-actions">
+          <button
+            id="nav-add-btn"
+            class="btn btn-primary"
+            aria-label="Upload a PDF book"
+          >
+            Upload PDF
+          </button>
+          <div
+            class="nav-user"
+            role="button"
+            tabindex="0"
+            aria-label="User profile"
+          >
+            <div class="nav-avatar" id="nav-avatar" aria-hidden="true">DU</div>
+            <span class="nav-username" id="nav-username">User</span>
+          </div>
+          <button id="logout-btn" class="btn btn-ghost" aria-label="Logout">
+            Logout
+          </button>
+        </div>
+      </nav>
+
+      <!-- ── Main Content ─────────────────────────────────────────────────── -->
+      <main id="main-content" aria-label="Book library">
+        <section id="popular-books-section">
+          <div class="section-header" id="popular-books-header" style="cursor: pointer; user-select: none;" aria-expanded="true">
+            <h2 class="section-title">Popular Books</h2>
+            <button id="popular-books-toggle" class="btn btn-ghost" aria-label="Toggle popular books" style="padding: 4px 8px; font-size: 1rem; border: none;">▼</button>
+          </div>
+          <div id="popular-books-grid" role="list" aria-label="Popular books collection"></div>
+        </section>
+
+        <section id="library-section">
+          <div class="section-header">
+            <h2 class="section-title">Library Collection</h2>
+            <button
+              id="add-book-btn2"
+              class="btn btn-secondary"
+              onclick="openAddBook()"
+            >
+              Upload PDF
+            </button>
+          </div>
+
+          <!-- Genre Filter Chips -->
+          <div
+            id="genre-filters"
+            class="genre-filters"
+            role="group"
+            aria-label="Filter by genre"
+          ></div>
+
+          <!-- Books Grid -->
+          <div id="books-grid" role="list" aria-label="Book collection"></div>
+        </section>
+      </main>
+    </div>
+    <!-- /#app -->
+
+    <!-- ═══════════════════════════ DIALOGS ═════════════════════════════════ -->
+
+    <!-- Book Detail Modal -->
+    <dialog id="book-modal" aria-labelledby="modal-title" aria-modal="true">
+      <div id="book-modal-content" role="document">
+        <div id="modal-cover-section" class="modal-cover-section"></div>
+        <div class="modal-body">
+          <h2 class="modal-title" id="modal-title"></h2>
+          <p class="modal-author" id="modal-author"></p>
+          <div class="modal-badges" id="modal-badges"></div>
+          <p class="modal-description" id="modal-description"></p>
+          <div class="modal-actions">
+            <button id="modal-read-btn" class="btn btn-primary">
+              📖 Read Now
+            </button>
+            <button id="modal-edit-btn" class="btn btn-secondary">
+              ✏️ Edit Book
+            </button>
+            <button
+              onclick="document.getElementById('book-modal').close()"
+              class="btn btn-ghost"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- PDF Upload Modal (Step 1: Drop Zone + Step 2: Metadata) -->
+    <dialog
+      id="book-form-modal"
+      aria-labelledby="form-modal-title"
+      aria-modal="true"
+    >
+      <div id="book-form-modal-content" role="document">
+        <!-- ── Step 1: PDF Upload ───────────────────── -->
+        <div id="upload-step">
+          <div class="form-modal-header">
+            <h2 id="form-modal-title">📤 Upload a PDF Book</h2>
+            <button
+              onclick="closeUploadModal()"
+              class="btn btn-ghost"
+              aria-label="Close"
+              style="padding: 8px 12px"
+            >
+              ✕
+            </button>
+          </div>
+          <div class="form-modal-body">
+            <!-- Drop Zone -->
+            <div
+              id="pdf-drop-zone"
+              class="pdf-drop-zone"
+              role="button"
+              tabindex="0"
+              aria-label="Drop PDF here or click to browse"
+            >
+              <input
+                type="file"
+                id="pdf-file-input"
+                accept="application/pdf"
+                aria-hidden="true"
+              />
+              <div class="drop-zone-icon">📄</div>
+              <p class="drop-zone-primary">Drop your PDF here</p>
+              <p class="drop-zone-secondary">
+                or <span class="drop-zone-link">click to browse</span>
+              </p>
+              <p class="drop-zone-hint">
+                PDF files only · Max 50 MB · Saved to database
+              </p>
+            </div>
+            <!-- Upload progress bar -->
+            <div id="upload-progress-wrap" class="upload-progress-wrap hidden">
+              <div class="upload-progress-label">
+                <span id="upload-filename">Reading file…</span>
+                <span id="upload-pct">0%</span>
+              </div>
+              <div class="upload-progress-bar">
+                <div id="upload-progress-fill"></div>
+              </div>
+            </div>
+            <!-- Size warning -->
+            <div id="size-warning" class="size-warning hidden">
+              ⚠️ Large files (&gt;4 MB) may exceed browser storage limits. The
+              file will still be uploaded but may not persist after closing the
+              browser.
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Step 2: Metadata Form ────────────────── -->
+        <div id="metadata-step" class="hidden">
+          <div class="form-modal-header">
+            <div style="display: flex; align-items: center; gap: 12px">
+              <button
+                id="back-to-upload"
+                class="btn btn-ghost"
+                style="padding: 8px 10px"
+              >
+                ← Back
+              </button>
+              <h2 id="meta-modal-title">📝 Book Details</h2>
+            </div>
+            <button
+              onclick="closeUploadModal()"
+              class="btn btn-ghost"
+              aria-label="Close"
+              style="padding: 8px 12px"
+            >
+              ✕
+            </button>
+          </div>
+          <div class="form-modal-body">
+            <!-- PDF preview strip -->
+            <div class="pdf-preview-strip">
+              <div class="pdf-preview-icon">📄</div>
+              <div class="pdf-preview-info">
+                <span id="meta-filename" class="pdf-preview-name"></span>
+                <span id="meta-filesize" class="pdf-preview-size"></span>
+              </div>
+              <span class="pdf-badge">PDF</span>
+            </div>
+
+            <form id="book-form" novalidate>
+              <input type="hidden" id="book-form-id" />
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="form-title">Title *</label>
+                  <input
+                    type="text"
+                    id="form-title"
+                    placeholder="e.g. The Great Gatsby"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="form-author">Author *</label>
+                  <input
+                    type="text"
+                    id="form-author"
+                    placeholder="e.g. Jane Austen"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="form-genre">Genre</label>
+                  <input
+                    type="text"
+                    id="form-genre"
+                    placeholder="e.g. Classic Fiction"
+                    list="genre-list"
+                  />
+                  <datalist id="genre-list">
+                    <option value="Classic Fiction"></option>
+                    <option value="Romance"></option>
+                    <option value="Science Fiction"></option>
+                    <option value="Dystopian Fiction"></option>
+                    <option value="Fantasy"></option>
+                    <option value="Mystery"></option>
+                    <option value="Gothic Horror"></option>
+                    <option value="Epic Poetry"></option>
+                    <option value="Biography"></option>
+                    <option value="History"></option>
+                    <option value="Historical Fiction"></option>
+                    <option value="Psychological Fiction"></option>
+                    <option value="Self Help"></option>
+                    <option value="Social Drama"></option>
+                    <option value="Adventure"></option>
+                    <option value="Academic"></option>
+                    <option value="Python"></option>
+                    <option value="Java"></option>
+                    <option value="JavaScript"></option>
+                    <option value="Rust"></option>
+                    <option value="Go"></option>
+                    <option value="C Programming"></option>
+                    <option value="DevOps"></option>
+                    <option value="Data Science"></option>
+                    <option value="Computer Science"></option>
+                  </datalist>
+                </div>
+                <div class="form-group">
+                  <label for="form-year">Year Published</label>
+                  <input
+                    type="number"
+                    id="form-year"
+                    placeholder="e.g. 2023"
+                    min="1"
+                    max="2099"
+                  />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="form-rating">Your Rating (0–5)</label>
+                  <input
+                    type="number"
+                    id="form-rating"
+                    placeholder="4.0"
+                    min="0"
+                    max="5"
+                    step="0.1"
+                    value="4.0"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="form-color">Card Accent Color</label>
+                  <div style="display: flex; gap: 10px; align-items: center">
+                    <input
+                      type="color"
+                      id="form-color"
+                      value="#6C63FF"
+                      style="
+                        width: 44px;
+                        height: 38px;
+                        padding: 2px;
+                        background: var(--clr-surface);
+                        border: 1px solid var(--clr-border);
+                        border-radius: 8px;
+                        cursor: pointer;
+                      "
+                    />
+                    <span style="font-size: 0.8rem; color: var(--clr-muted)"
+                      >Choose accent</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="form-description">Description (optional)</label>
+                <textarea
+                  id="form-description"
+                  placeholder="What is this book about?"
+                ></textarea>
+              </div>
+
+              <div class="form-modal-footer">
+                <button
+                  type="button"
+                  id="cancel-form-btn"
+                  class="btn btn-ghost"
+                >
+                  Cancel
+                </button>
+                <button type="submit" class="btn btn-primary">
+                  📚 Add to Library
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- ── Edit-only form (no PDF re-upload needed) ── -->
+        <div id="edit-step" class="hidden">
+          <div class="form-modal-header">
+            <h2>✏️ Edit Book Details</h2>
+            <button
+              onclick="closeUploadModal()"
+              class="btn btn-ghost"
+              style="padding: 8px 12px"
+            >
+              ✕
+            </button>
+          </div>
+          <div class="form-modal-body">
+            <form id="edit-form" novalidate>
+              <input type="hidden" id="edit-form-id" />
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="edit-title">Title *</label>
+                  <input type="text" id="edit-title" required />
+                </div>
+                <div class="form-group">
+                  <label for="edit-author">Author *</label>
+                  <input type="text" id="edit-author" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="edit-genre">Genre</label>
+                  <input type="text" id="edit-genre" list="genre-list-edit" />
+                  <datalist id="genre-list-edit">
+                    <option value="Classic Fiction"></option>
+                    <option value="Romance"></option>
+                    <option value="Science Fiction"></option>
+                    <option value="Dystopian Fiction"></option>
+                    <option value="Fantasy"></option>
+                    <option value="Mystery"></option>
+                    <option value="Gothic Horror"></option>
+                    <option value="Epic Poetry"></option>
+                    <option value="Biography"></option>
+                    <option value="History"></option>
+                    <option value="Historical Fiction"></option>
+                    <option value="Psychological Fiction"></option>
+                    <option value="Self Help"></option>
+                    <option value="Social Drama"></option>
+                    <option value="Adventure"></option>
+                    <option value="Academic"></option>
+                    <option value="Python"></option>
+                    <option value="Java"></option>
+                    <option value="JavaScript"></option>
+                    <option value="Rust"></option>
+                    <option value="Go"></option>
+                    <option value="C Programming"></option>
+                    <option value="DevOps"></option>
+                    <option value="Data Science"></option>
+                    <option value="Computer Science"></option>
+                  </datalist>
+                </div>
+                <div class="form-group">
+                  <label for="edit-year">Year Published</label>
+                  <input type="number" id="edit-year" min="-3000" max="2099" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="edit-rating">Rating (0–5)</label>
+                  <input
+                    type="number"
+                    id="edit-rating"
+                    min="0"
+                    max="5"
+                    step="0.1"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="edit-color">Accent Color</label>
+                  <input
+                    type="color"
+                    id="edit-color"
+                    value="#6C63FF"
+                    style="
+                      width: 44px;
+                      height: 38px;
+                      padding: 2px;
+                      background: var(--clr-surface);
+                      border: 1px solid var(--clr-border);
+                      border-radius: 8px;
+                      cursor: pointer;
+                    "
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="edit-description">Description</label>
+                <textarea id="edit-description"></textarea>
+              </div>
+              <div class="form-modal-footer">
+                <button
+                  type="button"
+                  id="cancel-edit-btn"
+                  class="btn btn-ghost"
+                >
+                  Cancel
+                </button>
+                <button type="submit" class="btn btn-primary">
+                  💾 Save Changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Reader Modal -->
+    <dialog
+      id="reader-modal"
+      aria-labelledby="reader-book-title"
+      aria-modal="true"
+    >
+      <div id="reader-modal-content" role="document">
+        <div class="reader-header">
+          <span class="reader-title" id="reader-book-title"></span>
+          <div class="reader-controls">
+            <button
+              id="reader-open-new"
+              class="btn btn-secondary"
+              style="padding: 8px 14px; font-size: 0.82rem"
+            >
+              🔗 Open in new tab
+            </button>
+            <button
+              id="reader-close"
+              class="btn btn-ghost"
+              style="padding: 8px 12px"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+        <div class="reader-iframe-wrapper">
+          <div id="reader-loading" class="reader-loading">
+            <div class="spinner"></div>
+            <p>Loading book…</p>
+          </div>
+          <iframe
+            id="reader-iframe"
+            title="Book reader"
+            src="about:blank"
+            allow="fullscreen"
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- ═══════════════════════════ TOAST CONTAINER ══════════════════════════ -->
+    <div id="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
